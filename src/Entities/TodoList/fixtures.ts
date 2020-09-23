@@ -1,4 +1,4 @@
-import { ClientId, TodoInstance, TodoStatus } from './types';
+import { ClientId, TodoInstance, TodoStatus, Todo } from './types';
 
 const todoListFixture: Map<ClientId, TodoInstance> = new Map();
 
@@ -26,6 +26,25 @@ todoListFixture.set('2', {
   pubDate: new Date(2020, 4, 4, 2, 2),
 });
 
+const sortedByDateArray: Todo[] = [{
+  id: '9',
+  text: 'zxcvb',
+  status: 'New',
+}, {
+  id: '3',
+  text: 'qwerty',
+  status: 'New',
+}, {
+  id: '4',
+  text: 'asdfg',
+  status: 'Completed',
+}, {
+  id: '2',
+  text: '123456',
+  status: 'New',
+}];
+
 export {
   todoListFixture,
+  sortedByDateArray,
 };

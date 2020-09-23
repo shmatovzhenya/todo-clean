@@ -57,19 +57,14 @@ class TodoList {
 
   [Symbol.iterator]() {
     const todoList: Todo[] = convertTodoMapToSortedArray(this.collection, this.options);
+    const todoListSize = todoList.length;
+    let index = 0;
 
     return {
-      index: 0,
-      collection: this.collection,
-      options: this.options,
       next(): IteratorResult<Todo> {
         return {
-          done: false,
-          value: {
-            text: '13',
-            id: '23',
-            status: 'New',
-          },
+          done: index >= todoListSize,
+          value: todoList[index++],
         };
       }
     };
