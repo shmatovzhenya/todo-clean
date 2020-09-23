@@ -8,16 +8,16 @@ todoListFixture.set('3', {
   pubDate: new Date(2020, 3, 25, 16, 23),
 });
 
-todoListFixture.set('1', {
+todoListFixture.set('4', {
   text: 'asdfg',
   status: 'Completed',
-  pubDate: new Date(2020, 3, 25, 1, 22),
+  pubDate: new Date(2020, 3, 25, 16, 23),
 });
 
 todoListFixture.set('9', {
   text: 'zxcvb',
   status: 'New',
-  pubDate: new Date(2020, 4, 2, 2, 2),
+  pubDate: new Date(2020, 1, 2, 2, 2),
 });
 
 todoListFixture.set('2', {

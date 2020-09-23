@@ -33,10 +33,11 @@ const compareClientIdFunction: CompareFunction<ClientId> = (clientId1: ClientId,
   const id2: number = parseInt(clientId2);
 
   if (id1 < id2) {
-    return 1;
-  } else if (id1 > id2) {
     return -1;
+  } else if (id1 > id2) {
+    return 1;
   } else {
+    // Untested, because we using set of client ids
     return 0;
   }
 };

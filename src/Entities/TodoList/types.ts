@@ -1,7 +1,7 @@
 type TodoStatus = 'New' | 'Completed';
 type ClientId = string;
 type Text = string;
-type SortType = 'ByAddition';
+type SortType = 'ByAddition' | 'Default';
 
 type Todo = {
   id: ClientId;
