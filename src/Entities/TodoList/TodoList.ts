@@ -12,13 +12,19 @@ import { DEFAULT_OPTIONS, defaultIdCreator, convertTodoMapToSortedArray } from '
 
 
 class TodoList {
-  private orderId: OrderId;
+  private orderId: OrderId = 0;
 
   constructor(
     private collection: Map<ClientId, TodoInstance> = new Map(),
     private options: Options = DEFAULT_OPTIONS,
     private createId: () => ClientId = defaultIdCreator,
-  ) {}
+  ) {
+    for (let todo of collection) {
+      if (todo[1].orderId > this.orderId) {
+        this.orderId = todo[1].orderId;
+      }
+    }
+  }
 
   add(text: Text): TodoList {
     const clientId = this.createId();
@@ -57,7 +63,7 @@ class TodoList {
   }
 
   get length(): number {
-    return this.options.mask.size;
+    return Math.min(this.options.mask.size, this.collection.size);
   }
 
   [Symbol.iterator]() {
