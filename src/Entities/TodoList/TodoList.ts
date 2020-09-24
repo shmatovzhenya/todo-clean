@@ -5,12 +5,15 @@ import {
   Todo,
   TodoInstance,
   Options,
+  OrderId,
 } from './types';
 
 import { DEFAULT_OPTIONS, defaultIdCreator, convertTodoMapToSortedArray } from './utils';
 
 
 class TodoList {
+  private orderId: OrderId;
+
   constructor(
     private collection: Map<ClientId, TodoInstance> = new Map(),
     private options: Options = DEFAULT_OPTIONS,
@@ -20,10 +23,12 @@ class TodoList {
   add(text: Text): TodoList {
     const clientId = this.createId();
 
+    this.orderId = this.orderId + 100;
+
     const todo: TodoInstance = {
       text,
       status: 'New',
-      pubDate: new Date(),
+      orderId: this.orderId,
     };
 
     this.collection.set(clientId, todo);

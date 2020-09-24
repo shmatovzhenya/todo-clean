@@ -2,6 +2,7 @@ type TodoStatus = 'New' | 'Completed';
 type ClientId = string;
 type Text = string;
 type SortType = 'ByAddition' | 'Default';
+type OrderId = number;
 
 type Todo = {
   id: ClientId;
@@ -13,7 +14,7 @@ type ComparasionResult = -1 | 0 | 1;
 type TodoInstance = {
   text: Text;
   status: TodoStatus;
-  pubDate: Date;
+  orderId: OrderId;
 };
 
 type Options = {
@@ -33,4 +34,5 @@ export {
   TodoInstance,
   Options,
   CompareFunction,
+  OrderId,
 };

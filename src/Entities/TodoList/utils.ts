@@ -1,4 +1,12 @@
-import { ClientId, Options, TodoInstance, Todo, ComparasionResult, CompareFunction } from './types';
+import {
+  ClientId,
+  Options,
+  TodoInstance,
+  Todo,
+  ComparasionResult,
+  CompareFunction,
+  OrderId,
+} from './types';
 
 const defaultIdCreator = (): ClientId => {
   return (Math.random() * 1000).toString();
@@ -18,7 +26,7 @@ const DEFAULT_OPTIONS: Options = {
   sortType: 'ByAddition',
 };
 
-const compareDateFunction: CompareFunction<Date> = (date1: Date, date2: Date): ComparasionResult => {
+const compareDateFunction: CompareFunction<OrderId> = (date1: OrderId, date2: OrderId): ComparasionResult => {
   if (date1 < date2) {
     return -1;
   } else if (date1 > date2) {
@@ -43,7 +51,7 @@ const compareClientIdFunction: CompareFunction<ClientId> = (clientId1: ClientId,
 };
 
 const convertTodoMapToSortedArray = (collection: Map<ClientId, TodoInstance>, options: Options): Todo[] => {
-  type TodoWithSortParams = Todo & { date: Date };
+  type TodoWithSortParams = Todo & { orderId: OrderId };
   const { mask, sortType } = options;
   const unsortedResult: TodoWithSortParams[] = [];
 
@@ -58,13 +66,13 @@ const convertTodoMapToSortedArray = (collection: Map<ClientId, TodoInstance>, op
       id: clientId,
       text: todoInstance.text,
       status: todoInstance.status,
-      date: todoInstance.pubDate,
+      orderId: todoInstance.orderId,
     });
   }
 
   let result: Todo[] = unsortedResult.sort((left: TodoWithSortParams, right: TodoWithSortParams): ComparasionResult => {
     if (sortType === 'ByAddition') {
-      return compareDateFunction(left.date, right.date);
+      return compareDateFunction(left.orderId, right.orderId);
     }
 
     return compareClientIdFunction(left.id, right.id);
