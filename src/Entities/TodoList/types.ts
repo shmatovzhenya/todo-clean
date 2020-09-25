@@ -1,8 +1,14 @@
+interface Flavoring<FlavorT> {
+  _type?: FlavorT;
+}
+
+type Flavor<T, FlavorT> = T & Flavoring<FlavorT>;
+
 type TodoStatus = 'New' | 'Completed';
-type ClientId = string;
+type ClientId = Flavor<string, 'ClientId'>;
 type Text = string;
 type SortType = 'ByAddition' | 'Default';
-type OrderId = number;
+type OrderId = Flavor<number, 'OrderId'>;
 
 type Todo = {
   id: ClientId;
