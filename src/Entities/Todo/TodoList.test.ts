@@ -1,6 +1,11 @@
 import { TodoDTO, TodoId } from './types';
 import { TodoList } from './TodoList';
+import { SnapShot } from './SnapShot';
 import { TODO_LIST } from './fixtures';
+import * as CreateId from '../utils/createId';
+
+
+jest.mock('../utils/createId');
 
 describe('Testing TodoList', () => {
   test('Testing addition of todoList', () => {
@@ -102,5 +107,33 @@ describe('Testing TodoList', () => {
     expect(todoList.getList('Completed')).toStrictEqual([storedTodo[1]]);
     expect(todoList.getList('New').length).toBe(2);
     expect(todoList.getList('New')[1]).toStrictEqual(storedTodo[2]);
+  });
+
+  test('Testing of creaing snapshot', () => {
+    const storedTodo: TodoDTO[] = JSON.parse(JSON.stringify(TODO_LIST));
+    const todoList = new TodoList(storedTodo);
+    const snapshot: SnapShot =  todoList.createSnapshot();
+
+    todoList.add('123456');
+    snapshot.restore();
+
+    expect(todoList.getList()).toStrictEqual(storedTodo);
+  });
+
+  test('Testing hydratation for empty list', () => {
+    const todoList = new TodoList();
+    
+    todoList.hydrate();
+
+    expect(todoList.getList()).toStrictEqual([]);
+  });
+
+  test('Test of getting id', () => {
+    const mockedCreateId = CreateId as jest.Mocked<typeof CreateId>;
+    mockedCreateId.createId.mockReturnValue('aaaaa');
+
+    const todoList = new TodoList();
+
+    expect(todoList.id).toBe('aaaaa');
   });
 });
