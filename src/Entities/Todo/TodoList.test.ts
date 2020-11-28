@@ -4,7 +4,6 @@ import { SnapShot } from './SnapShot';
 import { TODO_LIST } from './fixtures';
 import * as CreateId from '../utils/createId';
 
-
 jest.mock('../utils/createId');
 
 describe('Testing TodoList', () => {
@@ -112,7 +111,7 @@ describe('Testing TodoList', () => {
   test('Testing of creaing snapshot', () => {
     const storedTodo: TodoDTO[] = JSON.parse(JSON.stringify(TODO_LIST));
     const todoList = new TodoList(storedTodo);
-    const snapshot: SnapShot =  todoList.createSnapshot();
+    const snapshot: SnapShot = todoList.createSnapshot();
 
     todoList.add('123456');
     snapshot.restore();
@@ -122,7 +121,7 @@ describe('Testing TodoList', () => {
 
   test('Testing hydratation for empty list', () => {
     const todoList = new TodoList();
-    
+
     todoList.hydrate();
 
     expect(todoList.getList()).toStrictEqual([]);

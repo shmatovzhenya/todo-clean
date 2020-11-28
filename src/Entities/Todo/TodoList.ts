@@ -25,11 +25,17 @@ class TodoList {
     return this._id;
   }
 
-  add(text: Text): void {
+  add(text: Text): TodoDTO {
     const todo = new Todo(text);
 
     this._list.push(todo.id);
     this._record[todo.id] = todo;
+
+    return {
+      id: todo.id,
+      status: todo.status,
+      text: todo.text,
+    };
   }
 
   removeByIds(ids: TodoId[]) {
