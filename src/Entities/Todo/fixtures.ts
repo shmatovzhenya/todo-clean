@@ -1,4 +1,4 @@
-import { TodoDTO } from './types';
+import type { TodoDTO } from './types';
 
 const TODO_LIST: TodoDTO[] = [
   {

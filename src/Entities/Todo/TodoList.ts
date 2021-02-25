@@ -1,11 +1,15 @@
 import { createId } from '../utils/createId';
-import { TodoId, Text, Status, TodoListId, TodoDTO } from './types';
+import type { TodoId, Text, Status, TodoListId, TodoDTO } from './types';
 import { Todo } from './Todo';
 import { SnapShot } from './SnapShot';
 
+type TodoRecord = {
+  [index: string]: Todo;
+};
+
 class TodoList {
   private _list: TodoId[] = [];
-  private _record: Record<TodoId, Todo> = {};
+  private _record: TodoRecord = {};
   private _id: TodoListId;
 
   constructor(list: TodoDTO[] = []) {

@@ -1,5 +1,5 @@
-import { Text, TodoDTO, TodoList, Status } from '../../../Entities/Todo';
-import { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
+import type { Text, TodoDTO, TodoList, Status } from '../../../Entities/Todo';
+import type { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
 
 
 type GetTodoSession = {

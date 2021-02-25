@@ -1,6 +1,6 @@
-import { TodoDTO, TodoId } from './types';
+import type { TodoDTO, TodoId } from './types';
 import { TodoList } from './TodoList';
-import { SnapShot } from './SnapShot';
+import type { SnapShot } from './SnapShot';
 import { TODO_LIST } from './fixtures';
 import * as CreateId from '../utils/createId';
 

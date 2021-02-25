@@ -1,5 +1,5 @@
-import { TodoDTO } from './types';
-import { TodoList } from './TodoList';
+import type { TodoDTO } from './types';
+import type { TodoList } from './TodoList';
 
 class SnapShot {
   private _list: TodoDTO[] = [];

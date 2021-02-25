@@ -3,7 +3,7 @@ type ErrorStatus = 'NetworkError' | 'BadArguments' | 'BadGateway' | 'ServerError
 interface ResponseFormat<T> {
   errorCode?: ErrorStatus;
   errorDescription?: string;
-  answer: T | null;
+  answer: T | undefined;
 }
 
 type LogLevel = 'info' | 'warning' | 'error' | 'panic';

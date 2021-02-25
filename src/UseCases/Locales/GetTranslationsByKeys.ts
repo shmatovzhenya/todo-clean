@@ -1,4 +1,4 @@
-import { UseCase, Storage, Logger } from '../types';
+import type { UseCase, Storage, Logger, ResponseFormat } from '../types';
 
 interface LocalesCache {
   hasKey(key: string): boolean;
@@ -6,7 +6,9 @@ interface LocalesCache {
   setByKey(key: string, value: string): void;
 }
 
-type Locales = Record<string, string>;
+type Locales = {
+  [index: string]: string;
+};
 
 type GetTranslationsSession = {
   storage: Storage<string[], Locales>;
@@ -23,7 +25,13 @@ class GetTranslationsByKey implements UseCase<string[], Locales> {
     return new Promise((resolve, reject) => {
       this.session.storage
         .do(keysForRequest)
-        .then(locales => {
+        .then((response: ResponseFormat<Locales>) => {
+          const locales = response.answer;
+
+          if (!locales) {
+            return;
+          }
+
           Object.keys(locales).forEach((key) => {
             const value: string = locales[key];
 
@@ -38,7 +46,7 @@ class GetTranslationsByKey implements UseCase<string[], Locales> {
             }
 
             return result;
-          }, {});
+          }, {} as Locales);
 
           resolve(result);
         })

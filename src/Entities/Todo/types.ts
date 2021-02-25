@@ -1,9 +1,9 @@
-import { Flavor } from '../../types';
+// import type { Flavor } from '../../types';
 
-type TodoId = Flavor<string, 'TodoId'>;
+type TodoId = string;
 type Text = string;
 type Status = 'New' | 'Completed';
-type TodoListId = Flavor<string, 'TodoListId'>;
+type TodoListId = string;
 
 type TodoDTO = {
   id: TodoId;

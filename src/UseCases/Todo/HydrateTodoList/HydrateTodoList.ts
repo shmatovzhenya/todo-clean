@@ -1,5 +1,5 @@
-import { Text, TodoDTO, TodoList, Status } from '../../../Entities/Todo';
-import { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
+import type { Text, TodoDTO, TodoList, Status } from '../../../Entities/Todo';
+import type { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
 
 
 type HydrateTodoSession = {
@@ -19,7 +19,7 @@ class HydrateTodoList implements UseCase<void, TodoDTO[]> {
       this.session
         .loadTodoStorage
         .do()
-        .then((response) => {
+        .then((response: ResponseFormat<TodoDTO[]>) => {
           if (response.errorCode) {
             const err = {
               code: response.errorCode,

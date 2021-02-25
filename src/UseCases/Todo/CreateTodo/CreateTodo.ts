@@ -1,5 +1,5 @@
-import { Text, TodoDTO, TodoList } from '../../../Entities/Todo';
-import { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
+import type { Text, TodoDTO, TodoList } from '../../../Entities/Todo';
+import type { UseCase, Storage, Logger, ErrorStatus, Notifier, ResponseFormat } from '../../types';
 
 
 type CreateTodoSession = {
@@ -16,7 +16,7 @@ type CreateTodoOptions = {
 type Snapshot = ReturnType<typeof TodoList.prototype.createSnapshot>;
 
 class CreateTodo implements UseCase<CreateTodoOptions, void> {
-  private snapShot: Snapshot;
+  private snapShot?: Snapshot;
 
   constructor(private session: CreateTodoSession) {}
 
@@ -51,7 +51,10 @@ class CreateTodo implements UseCase<CreateTodoOptions, void> {
 
   rollback(): void {
     this.session.logger.log('info', `Rollback of last creating todo`);
-    this.snapShot.restore();
+
+    if (this.snapShot) {
+      this.snapShot.restore();
+    }
   }
 }
 

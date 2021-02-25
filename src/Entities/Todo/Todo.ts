@@ -1,4 +1,4 @@
-import { TodoId, Text, Status } from './types';
+import type { TodoId, Text, Status } from './types';
 import { createId } from '../utils/createId';
 
 class Todo {
